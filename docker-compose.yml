@@ -1,0 +1,13 @@
+version: '2'
+services:
+        gg:
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                volumes:
+                        - gg:/
+                ports:
+                        - 1234:80
+                restart: always
+volumes:
+        gg:
