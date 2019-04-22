@@ -8,12 +8,14 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 # Install toolchain:
 RUN set -ex; \
     apt-get update; \
-    apt-get dist-upgrade -y
-RUN apt-get install -y --no-install-recommends \
+    apt-get dist-upgrade -y; \
+    apt-get install -y --no-install-recommends \
+        apt-utils \
         build-essential \
         curl \
         git \
         gpg \
+        gpg-agent \
         haskell-platform \
         quilt \
         texlive-full \
@@ -26,9 +28,8 @@ RUN set -ex; \
     cabal install --global pandoc; \
     pandoc --version
 RUN set -ex; \
-    apt-get install -y apt-utils gpg-agent; \
     curl -sL https://deb.nodesource.com/setup_10.x | bash -; \
-    apt-get install -y nodejs; \
+    apt-get install -y nodejs --no-install-recommends; \
     npm install -g less; \
     npm install -g clean-css; \
     npm install -g less-plugin-clean-css; \
