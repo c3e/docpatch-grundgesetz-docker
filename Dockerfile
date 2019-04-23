@@ -46,7 +46,7 @@ RUN set -ex; \
     git clone https://github.com/c3e/grundgesetz-web.git; \
     cd grundgesetz-web/; \
     git submodule init; \
-    git submodule update
+    git submodule update --remote --merge
 # Build repository:
 RUN set -ex; \
     cd grundgesetz-web; \
@@ -57,11 +57,20 @@ RUN set -ex; \
 RUN set -ex; \
     cd grundgesetz-web/; \
     make create
-# Build website:
+# Build website and clean up:
 RUN set -ex; \
     cd grundgesetz-web/; \
     make less; \
-    make uglifyjs
+    make uglifyjs; \
+    rm -rf .git/; \
+    rm .gitignore; \
+    rm .gitmodules; \
+    rm Makefile; \
+    rm grundgesetz-dev/.editorconfig; \
+    rm -rf grundgesetz-dev/.git/; \
+    rm grundgesetz-dev/.gitignore; \
+    rm -rf grundgesetz-dev/repo/.git/
 
 FROM nginx:alpine AS docpatch-grundgesetz-web
+
 COPY --from=docpatch-grundgesetz-build /grundgesetz-web/ /usr/share/nginx/html
