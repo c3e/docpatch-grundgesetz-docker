@@ -34,6 +34,9 @@ RUN set -ex; \
     npm install -g clean-css; \
     npm install -g less-plugin-clean-css; \
     npm install -g uglify-js
+# Remove apt index
+RUN set -ex; \
+    rm -rf /var/lib/apt/lists/*
 # Install docpatch:
 RUN set -ex; \
     git clone https://github.com/c3e/docpatch.git; \
