@@ -19,14 +19,20 @@ RUN set -ex; \
         haskell-platform \
         quilt \
         texlive-full \
-        wget
+        wget 
 RUN set -ex; \
-    cabal --version; \
-    cabal update; \
-    cabal install --global cabal-install; \
-    cabal --version; \
-    cabal install --global pandoc; \
+    mkdir /pandoc/; \
+    cd /pandoc; \
+    wget $(curl -s https://api.github.com/repos/USERNAME/REPONAME/releases/latest | grep 'browser_' | cut -d\" -f4) \;
+    apt install ./* ;\
     pandoc --version
+#RUN set -ex; \
+#    cabal --version; \
+#    cabal update; \
+#    cabal install --global cabal-install; \
+#    cabal --version; \
+#    cabal install --global pandoc; \
+#    pandoc --version
 RUN set -ex; \
     curl -sL https://deb.nodesource.com/setup_10.x | bash -; \
     apt-get install -y nodejs --no-install-recommends; \
