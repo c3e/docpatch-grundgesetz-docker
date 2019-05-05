@@ -16,7 +16,6 @@ RUN set -ex; \
         git \
         gpg \
         gpg-agent \
-        haskell-platform \
         quilt \
         texlive-full \
         wget
