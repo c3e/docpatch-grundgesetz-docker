@@ -23,8 +23,8 @@ RUN set -ex; \
 RUN set -ex; \
     mkdir /pandoc/; \
     cd /pandoc; \
-    wget $(curl -s https://api.github.com/repos/USERNAME/REPONAME/releases/latest | grep 'browser_' | cut -d\" -f4) \;
-    apt install ./* ;\
+    wget $(curl -s https://api.github.com/repos/USERNAME/REPONAME/releases/latest | grep 'browser_' | cut -d\" -f4); \
+    apt install ./* ; \
     pandoc --version
 #RUN set -ex; \
 #    cabal --version; \
